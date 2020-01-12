@@ -37,7 +37,7 @@ const ScatterContainer = styled.div`
     top: 0;
     bottom: 0;
     margin: auto;
-    position: absolute;
+    position: fixed;
     height: 600px;
     display: flex;
     justify-content: center;
