@@ -246,7 +246,7 @@ export const HomeLayout = ({ children }) => {
     const [scatters, setScatters] = useState([])
     const [avatarNumber, setAvatarNumber] = useState(1)
 
-    const generateScatters = () => {
+    const generateScatters = (useCircles = false) => {
         const newScatters = []
 
         for (let i = 0; i < 3; i++) {
@@ -257,9 +257,10 @@ export const HomeLayout = ({ children }) => {
                         position: "absolute",
                         left: `calc(-100px + ${Math.random() * 1000}px)`,
                         top: `calc(-200px + ${Math.random() * 500}px)`,
-                        width: `26px`,
+                        transform: `scale(${Math.min(1, Math.random()*3)}) rotate(${Math.random()* 360}deg)`,
+                        width: useCircles ? '300px' : `26px`,
                         height: "300px",
-                        borderRadius: "5px",
+                        borderRadius: useCircles ? '100%' : "5px",
                         background:
                             ColourSelections[
                                 Math.floor(
@@ -278,6 +279,10 @@ export const HomeLayout = ({ children }) => {
 
     const startAvatarTransition = () => {
         if (Math.random() * 10 < 7) return;
+
+        if (Math.random()*100 < 50) {
+            generateScatters(true);
+        }
 
         let internalAvatarNumber = 1;
 
@@ -338,7 +343,7 @@ export const HomeLayout = ({ children }) => {
                                         maxWidth: `600px`,
                                     }}
                                 >
-                                    I'm Patrick, a Brisbane based developer
+                                    I'm Patrick, a Brisbane<sup style={{fontSize: '12px', position: 'relative', top: '-20px', opacity: 0.5}}>AUS</sup> based developer
                                     working at Clipchamp.
                                 </div>
                             </TitleText>
