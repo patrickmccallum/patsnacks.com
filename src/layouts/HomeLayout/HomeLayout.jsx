@@ -343,7 +343,7 @@ export const HomeLayout = ({ children }) => {
                                         maxWidth: `600px`,
                                     }}
                                 >
-                                    I'm Patrick, a Brisbane<sup style={{fontSize: '12px', position: 'relative', top: '-20px', opacity: 0.5}}>AUS</sup> based developer
+                                    I'm Patrick, a Brisbane<sup style={{fontSize: '12px', position: 'relative', opacity: 0.5}}>AUS</sup> based developer
                                     working at Clipchamp.
                                 </div>
                             </TitleText>
