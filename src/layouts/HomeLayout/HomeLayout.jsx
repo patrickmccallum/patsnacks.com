@@ -284,11 +284,12 @@ const ColourSelections = ["#ffcc38", "#7da7d7", "#ff7e5d"]
 export const HomeLayout = ({ children }) => {
     const [scatters, setScatters] = useState([])
     const [avatarNumber, setAvatarNumber] = useState(1)
+    const [scatterCount, setScatterCount] = useState(3)
 
     const generateScatters = (useCircles = false) => {
         const newScatters = []
 
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < scatterCount; i++) {
             let styles = {
                 transition: "all ease-in-out 500ms",
                 position: "absolute",
@@ -372,7 +373,12 @@ export const HomeLayout = ({ children }) => {
                     <RightSide>
                         <div>
                             <TitleText
-                                onClick={() => generateScatters()}
+                                onClick={() => {
+                                    generateScatters()
+                                }}
+                                onDoubleClick={() => {
+                                    setScatterCount(scatterCount + 1)
+                                }}
                                 style={{
                                     fontSize: `45px`,
                                 }}
