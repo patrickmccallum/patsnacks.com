@@ -342,7 +342,7 @@ export const HomeLayout = ({ children }) => {
         }
     }
 
-    useEffect(generateScatters, [])
+    useEffect(generateScatters, [scatterCount])
     useEffect(startAvatarTransition, [])
 
     return (
@@ -378,6 +378,11 @@ export const HomeLayout = ({ children }) => {
                                 }}
                                 onDoubleClick={() => {
                                     setScatterCount(scatterCount + 1)
+                                }}
+                                onContextMenu={event => {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                    generateScatters(true);
                                 }}
                                 style={{
                                     fontSize: `45px`,
