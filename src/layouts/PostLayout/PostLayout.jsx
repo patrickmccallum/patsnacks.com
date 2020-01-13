@@ -9,7 +9,7 @@ const HeaderContainer = styled.header`
     display: flex;
     margin: auto;
     justify-content: center;
-    border-bottom: 2px solid ${props => props.theme.lineColor};
+    border-bottom: 1px solid ${props => props.theme.lineColor};
 
     > div {
         display: flex;

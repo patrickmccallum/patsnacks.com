@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
 import Avatar from "../../components/avatar"
-import AvatarClosed from '../../components/images/AvatarClosed'
-import AvatarDrinking from '../../components/images/AvatarDrinking'
-import AvatarDying from '../../components/images/AvatarDying'
+import AvatarClosed from "../../components/images/AvatarClosed"
+import AvatarDrinking from "../../components/images/AvatarDrinking"
+import AvatarDying from "../../components/images/AvatarDying"
 import { Link } from "gatsby"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 import { MainLayout } from "../MainLayout/MainLayout"
 
 const ContainWidth = 1200
@@ -58,6 +58,24 @@ const RightSide = styled.section`
     padding-top: 10px;
 `
 
+const ClickyAnimation = keyframes`
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1);
+    }
+    75% {
+        transform: scale(0.85);
+    }
+    100% {
+        transform: scale(1);
+    }
+`
+
 const TitleText = styled.div`
     margin-bottom: 5px;
     user-select: none;
@@ -67,6 +85,22 @@ const TitleText = styled.div`
         padding: 5px 10px;
         color: ${props => props.theme.contrastForeColor};
         display: inline-block;
+
+        &.clicky {
+            animation: ${ClickyAnimation} 1s 1;
+            animation-delay: 1s;
+            cursor: pointer;
+
+            transition: all ease-out 100ms;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+
+            &:active {
+                transform: scale(0.97);
+            }
+        }
     }
 `
 
@@ -192,7 +226,7 @@ const AvatarCont = styled.div`
     &:hover span {
         opacity: 1;
     }
-    
+
     > div {
         transition: opacity linear 200ms;
     }
@@ -204,9 +238,12 @@ const CenterContainer = styled.div`
     align-items: center;
     height: 100vh;
 
-    .avatar-1, .avatar-2, .avatar-3, .avatar-4 {
-        position: absolute!important;
-        top: 0!important;
+    .avatar-1,
+    .avatar-2,
+    .avatar-3,
+    .avatar-4 {
+        position: absolute !important;
+        top: 0 !important;
         bottom: 0;
         left: 0;
         right: 0;
@@ -218,25 +255,27 @@ const CenterContainer = styled.div`
         }
     }
 
-    ${props => props.avatarNumber !== 1 && `
+    ${props =>
+        props.avatarNumber !== 1 &&
+        `
         ${BoxEyes}, ${BoxMe}, ${BoxWinningSmile} { opacity: 0!important;}
-    `} 
+    `}
 
     .avatar-1 {
-        opacity: ${props => props.avatarNumber === 1 ? 1 : 0};
-        pointer-events: ${props => props.avatarNumber === 1 ? 'all' : 'none'};
+        opacity: ${props => (props.avatarNumber === 1 ? 1 : 0)};
+        pointer-events: ${props => (props.avatarNumber === 1 ? "all" : "none")};
     }
     .avatar-2 {
-        opacity: ${props => props.avatarNumber === 2 ? 1 : 0};
-        pointer-events: ${props => props.avatarNumber === 2 ? 'all' : 'none'};
+        opacity: ${props => (props.avatarNumber === 2 ? 1 : 0)};
+        pointer-events: ${props => (props.avatarNumber === 2 ? "all" : "none")};
     }
     .avatar-3 {
-        opacity: ${props => props.avatarNumber === 3 ? 1 : 0};
-        pointer-events: ${props => props.avatarNumber === 3 ? 'all' : 'none'};
+        opacity: ${props => (props.avatarNumber === 3 ? 1 : 0)};
+        pointer-events: ${props => (props.avatarNumber === 3 ? "all" : "none")};
     }
     .avatar-4 {
-        opacity: ${props => props.avatarNumber === 4 ? 1 : 0};
-        pointer-events: ${props => props.avatarNumber === 4 ? 'all' : 'none'};
+        opacity: ${props => (props.avatarNumber === 4 ? 1 : 0)};
+        pointer-events: ${props => (props.avatarNumber === 4 ? "all" : "none")};
     }
 `
 
@@ -250,48 +289,55 @@ export const HomeLayout = ({ children }) => {
         const newScatters = []
 
         for (let i = 0; i < 3; i++) {
-            newScatters.push(
-                <div
-                    style={{
-                        transition: "all ease-in-out 500ms",
-                        position: "absolute",
-                        left: `calc(-100px + ${Math.random() * 1000}px)`,
-                        top: `calc(-200px + ${Math.random() * 500}px)`,
-                        transform: `scale(${Math.min(1, Math.random()*3)}) rotate(${Math.random()* 360}deg)`,
-                        width: useCircles ? '300px' : `26px`,
-                        height: "300px",
-                        borderRadius: useCircles ? '100%' : "5px",
-                        background:
-                            ColourSelections[
-                                Math.floor(
-                                    Math.random() * ColourSelections.length
-                                )
-                            ],
-                    }}
-                />
-            )
+            let styles = {
+                transition: "all ease-in-out 500ms",
+                position: "absolute",
+                left: `calc(-100px + ${Math.random() * 1000}px)`,
+                top: `calc(-200px + ${Math.random() * 500}px)`,
+                transform: `scale(${Math.min(
+                    1,
+                    Math.random() * 3
+                )}) rotate(${Math.random() * 360}deg)`,
+                width: useCircles ? "300px" : `26px`,
+                height: "300px",
+                borderRadius: useCircles ? "100%" : "5px",
+            }
+
+            if (Math.random() * 100 > 25) {
+                styles["background"] =
+                    ColourSelections[
+                        Math.floor(Math.random() * ColourSelections.length)
+                    ]
+            } else {
+                styles["border"] =
+                    `2px dashed ${ColourSelections[
+                        Math.floor(Math.random() * ColourSelections.length)
+                    ]}`
+            }
+
+            newScatters.push(<div style={{ ...styles }} />)
         }
 
         setScatters(newScatters)
     }
 
-
-
     const startAvatarTransition = () => {
-        if (Math.random() * 10 < 7) return;
+        if (Math.random() * 10 < 6) return
 
-        if (Math.random()*100 < 50) {
-            generateScatters(true);
+        if (Math.random() * 100 < 50) {
+            generateScatters(true)
         }
 
-        let internalAvatarNumber = 1;
+        let internalAvatarNumber = 1
 
         let interval = setInterval(() => {
-            setAvatarNumber(internalAvatarNumber + 1 > 4 ? 1 : internalAvatarNumber += 1)
-        }, 2000);
+            setAvatarNumber(
+                internalAvatarNumber + 1 > 4 ? 1 : (internalAvatarNumber += 1)
+            )
+        }, 2000)
 
         return () => {
-            clearInterval(interval);
+            clearInterval(interval)
         }
     }
 
@@ -331,7 +377,12 @@ export const HomeLayout = ({ children }) => {
                                     fontSize: `45px`,
                                 }}
                             >
-                                <div style={{ cursor: "pointer" }}>Hello,</div>
+                                <div
+                                    className="clicky"
+                                    style={{ cursor: "pointer" }}
+                                >
+                                    Hello,
+                                </div>
                             </TitleText>
                             <TitleText
                                 style={{
@@ -343,15 +394,24 @@ export const HomeLayout = ({ children }) => {
                                         maxWidth: `600px`,
                                     }}
                                 >
-                                    I'm Patrick, a Brisbane<sup style={{fontSize: '12px', position: 'relative', opacity: 0.5}}>AUS</sup> based developer
-                                    working at Clipchamp.
+                                    I'm Patrick, a Brisbane
+                                    <sup
+                                        style={{
+                                            fontSize: "12px",
+                                            position: "relative",
+                                            opacity: 0.5,
+                                        }}
+                                    >
+                                        AUS
+                                    </sup>{" "}
+                                    based developer working at Clipchamp.
                                 </div>
                             </TitleText>
 
                             <QuickLinks>
                                 <div className="hint">Quick reads</div>
                                 <div>
-                                    <Link
+                                    {/* <Link
                                         to={"/the-list"}
                                         className="pill"
                                         style={{
@@ -359,7 +419,7 @@ export const HomeLayout = ({ children }) => {
                                         }}
                                     >
                                         Stuff I've made
-                                    </Link>
+                                    </Link> */}
                                     <a
                                         href={
                                             "https://github.com/patrickmccallum"
