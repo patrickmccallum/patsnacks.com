@@ -281,16 +281,69 @@ const CenterContainer = styled.div`
 
 const ColourSelections = ["#ffcc38", "#7da7d7", "#ff7e5d"]
 
+const SCATTER_STYLE = {
+    'LINE': 0,
+    'CIRCLE': 1,
+    'SQUIRCLE': 2,
+    'DROP': 3,
+    'RANDOM': 4,
+}
+
 export const HomeLayout = ({ children }) => {
     const [scatters, setScatters] = useState([])
     const [avatarNumber, setAvatarNumber] = useState(1)
     const [scatterCount, setScatterCount] = useState(3)
+    const [scatterStyle, setScatterStyle] = useState(SCATTER_STYLE.LINE)
 
-    const generateScatters = (useCircles = false) => {
+    const getScatterStyle = () => {
+        let thisStyle = scatterStyle !== SCATTER_STYLE.RANDOM ? scatterStyle : Math.floor(Math.random()*3);
+
+        let styles = {
+            height: '300px',
+        };
+
+        if (Math.random() * 100 > 25) {
+            styles["background"] =
+                ColourSelections[
+                    Math.floor(Math.random() * ColourSelections.length)
+                ]
+        } else {
+            styles["border"] =
+                `2px dashed ${ColourSelections[
+                    Math.floor(Math.random() * ColourSelections.length)
+                ]}`
+        }
+
+        switch (thisStyle) {
+            case SCATTER_STYLE.LINE:
+                styles['width'] = '26px';
+                styles['borderRadius'] = '5px';
+                break;
+            case SCATTER_STYLE.CIRCLE:
+                styles['width'] = '300px';
+                styles['borderRadius'] = '100%';
+                break;
+            case SCATTER_STYLE.SQUIRCLE:
+                styles['width'] = '300px';
+                styles['borderRadius'] = '30px';
+                break;
+            case SCATTER_STYLE.DROP:
+                styles['width'] = '300px';
+                styles['borderRadius'] = '40% 0 40%';
+                break;
+            default:
+                console.warn('Invalid style type', scatterStyle, thisStyle);
+        }
+
+        return styles;
+    }
+
+    const generateScatters = () => {
         const newScatters = []
 
         for (let i = 0; i < scatterCount; i++) {
             let styles = {
+                ...getScatterStyle(),
                 transition: "all ease-in-out 500ms",
                 position: "absolute",
                 left: `calc(-100px + ${Math.random() * 1000}px)`,
@@ -299,21 +352,6 @@ export const HomeLayout = ({ children }) => {
                     1,
                     Math.random() * 3
                 )}) rotate(${Math.random() * 360}deg)`,
-                width: useCircles ? "300px" : `26px`,
-                height: "300px",
-                borderRadius: useCircles ? "100%" : "5px",
-            }
-
-            if (Math.random() * 100 > 25) {
-                styles["background"] =
-                    ColourSelections[
-                        Math.floor(Math.random() * ColourSelections.length)
-                    ]
-            } else {
-                styles["border"] =
-                    `2px dashed ${ColourSelections[
-                        Math.floor(Math.random() * ColourSelections.length)
-                    ]}`
             }
 
             newScatters.push(<div style={{ ...styles }} />)
@@ -342,7 +380,7 @@ export const HomeLayout = ({ children }) => {
         }
     }
 
-    useEffect(generateScatters, [scatterCount])
+    useEffect(generateScatters, [scatterCount, scatterStyle])
     useEffect(startAvatarTransition, [])
 
     return (
@@ -382,7 +420,7 @@ export const HomeLayout = ({ children }) => {
                                 onContextMenu={event => {
                                     event.preventDefault();
                                     event.stopPropagation();
-                                    generateScatters(true);
+                                    setScatterStyle(scatterStyle === SCATTER_STYLE.RANDOM ? SCATTER_STYLE.LINE : scatterStyle + 1)
                                 }}
                                 style={{
                                     fontSize: `45px`,
