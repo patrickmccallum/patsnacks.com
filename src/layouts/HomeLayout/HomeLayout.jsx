@@ -293,7 +293,7 @@ export const HomeLayout = ({ children }) => {
     const [scatters, setScatters] = useState([])
     const [avatarNumber, setAvatarNumber] = useState(1)
     const [scatterCount, setScatterCount] = useState(3)
-    const [scatterStyle, setScatterStyle] = useState(SCATTER_STYLE.LINE)
+    const [scatterStyle, setScatterStyle] = useState(SCATTER_STYLE.RANDOM)
 
     const getScatterStyle = () => {
         let thisStyle = scatterStyle !== SCATTER_STYLE.RANDOM ? scatterStyle : Math.floor(Math.random()*3);
