@@ -1,0 +1,38 @@
+{
+  "history": [
+    {
+      "name": "23shout",
+      "description": "The phone system for modern teams. No installs required; your team can make and receive calls in minutes from their own devices.\n\nSecond startup I've founded, funded by Skalata Ventures.",
+      "url": "https://23shout.com"
+    },
+    {
+      "name": "Clipchamp",
+      "description": "A video editing platform that allows users to edit videos in the browser.\n\nI was an early stage hire that worked on the core editor experience, later worked almost exclusively on the timeline and its development.",
+      "url": "https://clipchamp.com"
+    },
+    {
+      "name": "mimetype.io",
+      "description": "A fun side project, mimetype.io now receives over 10,000+ unique visits per month from purely organic Google search results.",
+      "url": "https://mimetype.io"
+    },
+    {
+      "name": "Lockbox",
+      "description": "Coming soon...?",
+      "url": null
+    }
+  ],
+  "quick": [
+    {
+      "name": "Linkedin",
+      "url": "https://www.linkedin.com/in/patrickmccallum"
+    },
+    {
+      "name": "GitHub",
+      "url": "https://github.com/patrickmccallum"
+    },
+    {
+      "name": "Twitter",
+      "url": "https://twitter.com/patsnacks"
+    }
+  ]
+}
