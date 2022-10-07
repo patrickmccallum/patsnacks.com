@@ -23,7 +23,7 @@ const IndexPage = () => (
       {/*  style={{ marginBottom: `var(--space-3)` }}*/}
       {/*/>*/}
       <h1>
-        Hi
+        Hi, I'm Patrick McCallum
       </h1>
     </div>
     <ul className={styles.list}>
