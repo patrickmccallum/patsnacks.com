@@ -7,12 +7,12 @@ import Seo from "../components/seo"
 import * as styles from "../components/index.module.css"
 import * as Links from '../components/links.json'
 
-const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter`
+const utmParameters = `?utm_source=blog&utm_medium=patsnacks&utm_campaign=portfolio-site`
 
 const IndexPage = () => (
     <Layout>
         <Seo title="Patrick McCallum"/>
-        <div className={styles.textCenter}>
+        <div>
             {/*<StaticImage*/}
             {/*  src="../images/example.png"*/}
             {/*  loading="eager"*/}
@@ -22,10 +22,20 @@ const IndexPage = () => (
             {/*  alt=""*/}
             {/*  style={{ marginBottom: `var(--space-3)` }}*/}
             {/*/>*/}
-            <h1>
-                Hi, I'm Patrick McCallum
+            <div>
+                Hello, my name is...
+            </div>
+            <h1 style={{margin: 0}}>
+                Patrick McCallum
             </h1>
+            <div>
+                This is my personal website
+            </div>
         </div>
+        <hr />
+        <h2>
+            Stuff I've done
+        </h2>
         <ul className={styles.list}>
             {Links.history.map(link => (
                 <li key={link.url} className={styles.listItem}>
@@ -44,6 +54,8 @@ const IndexPage = () => (
                 </li>
             ))}
         </ul>
+        <hr />
+        <h2>More links</h2>
         {Links.quick.map((link, i) => (
             <React.Fragment key={link.url}>
                 <a href={`${link.url}${utmParameters}`}>{link.name}</a>
