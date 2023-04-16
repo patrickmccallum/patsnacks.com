@@ -16,8 +16,13 @@
       "url": "https://mimetype.io"
     },
     {
+      "name": "Lugs.ai",
+      "description": "A 2023 side project. Lugs.ai is your ear. Accurately caption and transcribe all audio on your computer and microphone, no internet required. ",
+      "url": "https://lugs.ai"
+    },
+    {
       "name": "Lockbox",
-      "description": "Coming soon...?",
+      "description": "A 2023 side project. Coming soon...?",
       "url": null
     }
   ],
